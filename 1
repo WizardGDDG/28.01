@@ -1,0 +1,95 @@
+#include <iostream>
+
+using namespace std;
+
+// Определение структуры для комплексного числа
+struct Complex {
+    double real;      // Действительная часть
+    double imaginary; // Мнимая часть
+};
+
+// Функция для сложения двух комплексных чисел
+Complex add(Complex a, Complex b) {
+    Complex result;
+    result.real = a.real + b.real;
+    result.imaginary = a.imaginary + b.imaginary;
+    return result;
+}
+
+// Функция для вычитания двух комплексных чисел
+Complex subtract(Complex a, Complex b) {
+    Complex result;
+    result.real = a.real - b.real;
+    result.imaginary = a.imaginary - b.imaginary;
+    return result;
+}
+
+// Функция для умножения двух комплексных чисел
+Complex multiply(Complex a, Complex b) {
+    Complex result;
+    result.real = a.real * b.real - a.imaginary * b.imaginary;
+    result.imaginary = a.real * b.imaginary + a.imaginary * b.real;
+    return result;
+}
+
+// Функция для деления двух комплексных чисел
+Complex divide(Complex a, Complex b) {
+    Complex result;
+    double denominator = b.real * b.real + b.imaginary * b.imaginary;
+
+    if (denominator == 0) {
+        cout << "Ошибка: Деление на ноль!" << endl;
+        result.real = 0;
+        result.imaginary = 0;
+        return result; // Или выбросить исключение
+    }
+
+    result.real = (a.real * b.real + a.imaginary * b.imaginary) / denominator;
+    result.imaginary = (a.imaginary * b.real - a.real * b.imaginary) / denominator;
+    return result;
+}
+
+// Функция для вывода комплексного числа
+void printComplex(Complex num) {
+    cout << num.real;
+    if (num.imaginary >= 0) {
+        cout << " + " << num.imaginary << "i";
+    } else {
+        cout << " - " << -num.imaginary << "i";
+    }
+    cout << endl;
+}
+
+int main() {
+    Complex num1, num2, result;
+
+    cout << "Введите действительную и мнимую части первого комплексного числа: ";
+    cin >> num1.real >> num1.imaginary;
+
+    cout << "Введите действительную и мнимую части второго комплексного числа: ";
+    cin >> num2.real >> num2.imaginary;
+
+    cout << "Первое число: ";
+    printComplex(num1);
+
+    cout << "Второе число: ";
+    printComplex(num2);
+
+    result = add(num1, num2);
+    cout << "Сумма: ";
+    printComplex(result);
+
+    result = subtract(num1, num2);
+    cout << "Разность: ";
+    printComplex(result);
+
+    result = multiply(num1, num2);
+    cout << "Умножение: ";
+    printComplex(result);
+
+    result = divide(num1, num2);
+    cout << "Деление: ";
+    printComplex(result);
+
+    return 0;
+}
