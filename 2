@@ -1,98 +1,41 @@
 #include <iostream>
-#include <string>
 
-using namespace std;
-
-
-struct Car 
+struct CAR
 {
-    double length;          // Длина автомобиля (м)
-    double clearance;       // Клиренс (высота посадки) (м)
-    double engineVolume;    // Объем двигателя (л)
-    double enginePower;     // Мощность двигателя (л.с.)
-    double wheelDiameter;   // Диаметр колес (дюймы)
-    string color;           // Цвет автомобиля
-    string transmissionType;// Тип коробки передач ("автомат" или "механика")
+	int length;
+	int groundClearance;
+	int engineCapacity;
+	int enginePower;
+	int wheelDiameter;
+	std::string color;
+	std::string transmissionType;
+
+	void input(int newLength, int newGroundClearance, int newEngineCapacity, int newEnginePower, int newWheelDiameter, std::string newColor, std::string newTransmissionType)
+	{
+		length = newLength;
+		groundClearance = newGroundClearance;
+		engineCapacity = newEngineCapacity;
+		enginePower = newEnginePower;
+		wheelDiameter = newWheelDiameter;
+		color = newColor;
+		transmissionType = newTransmissionType;
+	}
+	void print()
+	{
+		std::cout << "Длина " << length << std::endl;
+		std::cout << "Высота клиренса " << groundClearance << std::endl;
+		std::cout << "Объем двигателя " << engineCapacity << std::endl;
+		std::cout << "Мощность двигателя " << enginePower << std::endl;
+		std::cout << "Диаметр колеса " << wheelDiameter << std::endl;
+		std::cout << "Цвет " << color << std::endl;
+		std::cout << "Тип коробки передач " << transmissionType << std::endl;
+	}
 };
 
 
-void setCarData(Car& car) {
-    cout << "Введите длину автомобиля (м): ";
-    cin >> car.length;
-
-    cout << "Введите клиренс (м): ";
-    cin >> car.clearance;
-
-    cout << "Введите объем двигателя (л): ";
-    cin >> car.engineVolume;
-
-    cout << "Введите мощность двигателя (л.с.): ";
-    cin >> car.enginePower;
-
-    cout << "Введите диаметр колес (дюймы): ";
-    cin >> car.wheelDiameter;
-
-    cout << "Введите цвет автомобиля: ";
-    cin.ignore(); // Очищаем буфер cin после ввода числа
-    getline(cin, car.color); // Используем getline для ввода строки с пробелами
-
-    cout << "Введите тип коробки передач (автомат/механика): ";
-    cin >> car.transmissionType;
+int main()
+{
+	CAR car;
+	
 }
 
-
-
-void displayCarData(const Car& car) {
-    cout << "Длина автомобиля: " << car.length << " м" << endl;
-    cout << "Клиренс: " << car.clearance << " м" << endl;
-    cout << "Объем двигателя: " << car.engineVolume << " л" << endl;
-    cout << "Мощность двигателя: " << car.enginePower << " л.с." << endl;
-    cout << "Диаметр колес: " << car.wheelDiameter << " дюймов" << endl;
-    cout << "Цвет: " << car.color << endl;
-    cout << "Тип коробки передач: " << car.transmissionType << endl;
-    cout << endl;
-}
-
-
-bool searchCarByColor(const Car& car, const string& colorToFind) {
-    return car.color == colorToFind;
-}
-
-
-
-bool searchCarByPower(const Car& car, double minPower) {
-    return car.enginePower >= minPower;
-}
-
-int main() {
-    Car myCar;
-
-   
-    setCarData(myCar);
-
-   
-    cout << "Данные об автомобиле:" << endl;
-    displayCarData(myCar);
-
-    
-    string colorToFind;
-    cout << "Введите цвет для поиска: ";
-    cin >> colorToFind;
-    if (searchCarByColor(myCar, colorToFind)) {
-        cout << "Найден автомобиль с указанным цветом." << endl;
-    } else {
-        cout << "Автомобиль с указанным цветом не найден." << endl;
-    }
-
-    // Поиск автомобиля по мощности
-    double minPower;
-    cout << "Введите минимальную мощность для поиска: ";
-    cin >> minPower;
-    if (searchCarByPower(myCar, minPower)) {
-        cout << "Найден автомобиль с мощностью не менее " << minPower << " л.с." << endl;
-    } else {
-        cout << "Автомобиль с указанной мощностью не найден." << endl;
-    }
-
-    return 0;
-}
